@@ -13,7 +13,11 @@ export const removeTemplate = ({ path }) => {
 	fse.removeSync(path);
 };
 
-export const createTemplate = async ({name, path}) => {
+export const createTemplate = async ({name, path, description}) => {
+	if(TemplatesRepo.has(name)){
+		if(!confirm("Template with this name already exists, would you like to override it?"))
+			return false;
+	}
 	try {
 		const targetPath = _path.join(__dirname, TEMPLATES_PATH, name);
 		
@@ -34,14 +38,16 @@ export const createTemplate = async ({name, path}) => {
 			path: targetPath,
 			originalPath: path,
 			id: generateIdFromName(name),
+			description,
 			remote
 		});
 		
 		notify({
-			title: "Hooray",
+			title: "Tempalte created successfully",
 			timeout: 2500
 		});
 	} catch (e) {
+		console.error(e);
 		notify({
 			title: "Error",
 			applyStyle: "error",

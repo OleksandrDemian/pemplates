@@ -40,9 +40,40 @@ const removeTemplate = async (id) => {
 	return false;
 };
 
+const updateTemplate = (id, data) => {
+	const templates = TEMPLATE_SETTINGS.get();
+	
+	for(let i = 0; i < templates.length; i++){
+		if(templates[i].id === id){
+			templates[i] = data;
+			TEMPLATE_SETTINGS.set(templates);
+			TEMPLATE_SETTINGS.write();
+			set(templates);
+			
+			return true;
+		}
+	}
+	
+	return false;
+};
+
+const has = (name) => {
+	const templates = TEMPLATE_SETTINGS.get();
+	
+	for(let i = 0; i < templates.length; i++){
+		if(templates[i].name === name){
+			return true;
+		}
+	}
+	
+	return false;
+};
+
 export default {
 	subscribe,
 	addTemplate,
 	getTemplate,
-	removeTemplate
+	updateTemplate,
+	removeTemplate,
+	has
 }

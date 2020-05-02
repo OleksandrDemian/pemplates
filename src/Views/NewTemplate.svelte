@@ -11,7 +11,8 @@
 		creating = true;
 		await createTemplate({
 			name: projectName,
-			path: projectPath
+			path: projectPath,
+			description: projectDescription
 		});
 		creating = false;
 	};

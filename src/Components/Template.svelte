@@ -22,6 +22,12 @@
 		const repoUrl = data["html_url"];
 
 		await pushRepository({repoUrl, cwd: template.path});
+		template.remote = true;
+		template.path = repoUrl;
+
+		//todo: test updateTemplate
+		TemplatesRepo.updateTemplate(template.id, template);
+
 		notify({
 			title: "Template published successfully"
 		});
@@ -43,8 +49,17 @@
 </script>
 
 <Container>
-	<p><b>{template.name}:</b> {template.id}</p>
-	<p><b>{template.remote ? "Remote" : "Local"}:</b> {template.originalPath}</p>
+	<h3>{template.name}</h3>
+	{ #if template.description }
+		<p>{template.description}</p>
+	{ /if }
+
+	{ #if template.remote }
+		<p><b>Remote:</b> <a href={template.originalPath}>{template.originalPath}</a></p>
+	{:else}
+		<p><b>Local</b></p>
+	{/if}
+
 	<button on:click={createProject}>Create project</button>
 
 	{ #if template.remote }
