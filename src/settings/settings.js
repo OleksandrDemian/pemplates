@@ -12,9 +12,9 @@ const readSettings = (fileName) => {
 	}
 };
 
-const writeSettings = (fileName, value) => {
-	fse.ensureDirSync(_path.join(__dirname, SETTINGS_PATH));
-	fse.writeJsonSync(_path.join(__dirname, SETTINGS_PATH, fileName), value);
+const writeSettings = async (fileName, value) => {
+	await fse.ensureDir(_path.join(__dirname, SETTINGS_PATH));
+	await fse.writeJson(_path.join(__dirname, SETTINGS_PATH, fileName), value);
 };
 
 /**
@@ -62,7 +62,7 @@ export const ARRAY_SETTINGS = (fileName, defaultValue) => {
 		settings = defaultValue;
 	}
 	
-	const write = () => writeSettings(fileName, settings);
+	const write = async () => await writeSettings(fileName, settings);
 	const get = () => settings;
 	const push = (value) => settings.push(value);
 	const set = (value) => settings = [...value];

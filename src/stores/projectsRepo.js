@@ -41,9 +41,22 @@ const removeProject = async (id) => {
 	return false;
 };
 
+const has = (name) => {
+	const projects = PROJECTS_SETTINGS.get();
+	
+	for(let i = 0; i < projects.length; i++){
+		if(projects[i].name === name){
+			return true;
+		}
+	}
+	
+	return false;
+};
+
 export default {
 	subscribe,
 	addProject,
 	getProject,
+	has,
 	removeProject
 }

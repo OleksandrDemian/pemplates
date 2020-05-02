@@ -6,7 +6,7 @@ const { subscribe, set, update } = writable([...TEMPLATE_SETTINGS.get()]);
 
 const addTemplate = async template => {
 	TEMPLATE_SETTINGS.push(template);
-	TEMPLATE_SETTINGS.write();
+	await TEMPLATE_SETTINGS.write();
 	
 	update(templates => [...templates, template]);
 };
@@ -30,7 +30,7 @@ const removeTemplate = async (id) => {
 		if(templates[i].id === id){
 			templates.splice(i, 1);
 			TEMPLATE_SETTINGS.set(templates);
-			TEMPLATE_SETTINGS.write();
+			await TEMPLATE_SETTINGS.write();
 			set(templates);
 			
 			return true;
@@ -40,14 +40,14 @@ const removeTemplate = async (id) => {
 	return false;
 };
 
-const updateTemplate = (id, data) => {
+const updateTemplate = async (id, data) => {
 	const templates = TEMPLATE_SETTINGS.get();
 	
 	for(let i = 0; i < templates.length; i++){
 		if(templates[i].id === id){
 			templates[i] = data;
 			TEMPLATE_SETTINGS.set(templates);
-			TEMPLATE_SETTINGS.write();
+			await TEMPLATE_SETTINGS.write();
 			set(templates);
 			
 			return true;

@@ -1,6 +1,5 @@
 <script>
 	import TemplatesRepo from "../stores/templatesRepo";
-	import ProjectsRepo from "../stores/projectsRepo";
 	import SettingsRepo from "../stores/settingsRepo";
 	import {createProjectFromTemplate} from "../utils/projectsManager";
 	import {removeTemplate} from "../utils/templatesManager";
@@ -9,10 +8,12 @@
 	import Container from "./Container.svelte";
 
 	export let template;
+	let creatingProject = false;
 
 	const createProject = async () => {
-		const project = await createProjectFromTemplate({id: template.id});
-		await ProjectsRepo.addProject(project);
+		creatingProject = true;
+		await createProjectFromTemplate({ name: template.name, id: template.id });
+		creatingProject = false;
 	};
 
 	const publishTemplate = async () => {
@@ -26,7 +27,7 @@
 		template.path = repoUrl;
 
 		//todo: test updateTemplate
-		TemplatesRepo.updateTemplate(template.id, template);
+		await TemplatesRepo.updateTemplate(template.id, template);
 
 		notify({
 			title: "Template published successfully"
@@ -36,12 +37,17 @@
 	const updateTemplateRepo = () => alert("Not implemented yet♥");
 
 	const remove = async () => {
-		await removeTemplate({path: template.path});
-		await TemplatesRepo.removeTemplate(template.id);
+		//save props before deleting template, as notify will refer new template (svelte render)
+		const name = template.name;
+		const path = template.path;
+		const id = template.id;
+
+		await removeTemplate({path});
+		await TemplatesRepo.removeTemplate(id);
 
 		notify({
 			title: "Template removed",
-			message: "Template " + template.name + " was successfully removed",
+			message: "Template " + name + " was successfully removed",
 			applyStyle: "warn",
 			timeout: 5000
 		});
@@ -49,24 +55,28 @@
 </script>
 
 <Container>
-	<h3>{template.name}</h3>
-	{ #if template.description }
-		<p>{template.description}</p>
-	{ /if }
-
-	{ #if template.remote }
-		<p><b>Remote:</b> <a href={template.originalPath}>{template.originalPath}</a></p>
+	{#if creatingProject}
+		<h3>Creating project</h3>
 	{:else}
-		<p><b>Local</b></p>
+		<h3>{template.name}</h3>
+		{ #if template.description }
+			<p>{template.description}</p>
+		{ /if }
+
+		{ #if template.remote }
+			<p><b>Remote:</b> <a href={template.originalPath}>{template.originalPath}</a></p>
+		{:else}
+			<p><b>Local</b></p>
+		{/if}
+
+		<button on:click={createProject}>Create project</button>
+
+		{ #if template.remote }
+			<button on:click={updateTemplateRepo}>Update template from repository</button>
+		{:else}
+			<button on:click={publishTemplate}>Publish template on Github</button>
+		{/if}
+
+		<button on:click={remove}>Remove template</button>
 	{/if}
-
-	<button on:click={createProject}>Create project</button>
-
-	{ #if template.remote }
-		<button on:click={updateTemplateRepo}>Update template from repository</button>
-	{:else}
-		<button on:click={publishTemplate}>Publish template on Github</button>
-	{/if}
-
-	<button on:click={remove}>Remove template</button>
 </Container>

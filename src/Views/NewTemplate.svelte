@@ -14,7 +14,7 @@
 			path: projectPath,
 			description: projectDescription
 		});
-		creating = false;
+		creating = false
 	};
 </script>
 

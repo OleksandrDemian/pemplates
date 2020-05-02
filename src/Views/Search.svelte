@@ -20,7 +20,7 @@
 <div id="searchResult">
     { #if result != null }
         { #if result.length > 0 }
-            {#each result as searchResult}
+            {#each result as searchResult (searchResult.full_name)}
 				<SearchResult result={searchResult} />
             {/each}
         {:else}
