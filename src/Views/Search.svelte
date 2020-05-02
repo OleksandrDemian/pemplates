@@ -14,7 +14,6 @@
     }
 </script>
 
-<h1>Search</h1>
 <input type="text" placeholder="Search for templates on GitHub" bind:value={search_value} />
 <button on:click={search}>Search</button>
 

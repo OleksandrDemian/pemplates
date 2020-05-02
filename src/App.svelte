@@ -41,14 +41,19 @@
 
 <div id="content">
 	{#if activeTab === "projects" }
+		<h1>Projects</h1>
 		<Projects />
 	{:else if activeTab === "templates"}
+		<h1>Templates</h1>
 		<Templates />
 	{:else if activeTab === "search"}
+		<h1>Search</h1>
 		<Search />
 	{:else if activeTab === "new"}
+		<h1>New Template</h1>
 		<NewTemplate projectName={name} projectPath={path} />
 	{:else if activeTab === "settings"}
+		<h1>Settings</h1>
 		<Settings />
 	{/if}
 </div>
@@ -60,7 +65,7 @@
 		vertical-align: top;
 		padding-top: 10px;
 		width: 25%;
-		min-width: max-content;
+		min-width: 250px;
 	}
 
 	button {
@@ -72,6 +77,7 @@
 		display: inline-block;
 		padding: 10px;
 		width: 50%;
+		min-width: 500px;
 	}
 
 </style>

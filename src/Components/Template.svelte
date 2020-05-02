@@ -1,6 +1,7 @@
 <script>
 	import TemplatesRepo from "../stores/templatesRepo";
 	import ProjectsRepo from "../stores/projectsRepo";
+	import SettingsRepo from "../stores/settingsRepo";
 	import {createProjectFromTemplate} from "../utils/projectsManager";
 	import {removeTemplate} from "../utils/templatesManager";
 	import {notify} from "power-notifier";
@@ -15,14 +16,12 @@
 	};
 
 	const publishTemplate = async () => {
-		//abfcff 7624 ced918 722729 e722 dc37d 107f 03368
-		const response = await createRepository({name: "test3", authToken: "abfcff7624ced918722729e722dc37d107f03368"});
+		const response = await createRepository({name: template.name, authToken: SettingsRepo.getGithubToken()});
 		const repoUrl = response["html_url"];
-		// const repoUrl = "https://github.com/OleksandrDemian/test3";
 
 		await pushRepository({repoUrl, cwd: template.path});
 		notify({
-			title: "WHAAAAAAT!!!!♥♥♥"
+			title: "Template published successfully"
 		});
 	};
 
@@ -49,7 +48,7 @@
 	{ #if template.remote }
 		<button on:click={updateTemplateRepo}>Update template from repository</button>
 	{:else}
-		<button on:click={publishTemplate}>Publish template</button>
+		<button on:click={publishTemplate}>Publish template on Github</button>
 	{/if}
 
 	<button on:click={remove}>Remove template</button>

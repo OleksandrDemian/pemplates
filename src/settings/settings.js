@@ -34,6 +34,8 @@ export const SETTINGS = (fileName, defaultValue) => {
 	// const read = () => readSettings(fileName);
 	const get = () => settings;
 	const set = (value) => settings = value;
+	const setProp = (key, value) => settings[key] = value;
+	const getProp = (key) => settings[key];
 	const update = (name, value) => settings[name] = value;
 	
 	return {
@@ -41,6 +43,8 @@ export const SETTINGS = (fileName, defaultValue) => {
 		// read,
 		get,
 		set,
+		setProp,
+		getProp,
 		update
 	}
 };

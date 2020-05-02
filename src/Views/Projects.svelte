@@ -3,7 +3,6 @@
 	import Project from "../Components/Project.svelte";
 </script>
 
-<h1>Projects</h1>
 <div id="projectsList">
     { #if $projectsRepo.length > 0 }
         {#each $projectsRepo as project}

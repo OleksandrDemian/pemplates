@@ -3,7 +3,6 @@
 	import Template from "../Components/Template.svelte";
 </script>
 
-<h1>Templates</h1>
 <div id="templatesList">
 	{ #if $templates.length > 0 }
 		{#each $templates as template}

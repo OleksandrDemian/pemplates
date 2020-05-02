@@ -20,7 +20,6 @@
 {#if creating}
 	<h1>Creating {projectName}</h1>
 {:else}
-	<h1>New Template</h1>
 	<input bind:value={projectName} placeholder="Template name" />
 	<input bind:value={projectPath} placeholder="Drop folder or write/copy url/path fo a project to use as template" />
 	<textarea bind:value={projectDescription} placeholder="*(optional) Insert description"></textarea>
