@@ -7,8 +7,6 @@
 	import {onMount, onDestroy} from "svelte";
 	import {addListener, removeListener} from "./utils/dropListener";
 	import Settings from "./Views/Settings.svelte";
-	import {createRepository, pushRepository} from "./utils/gitUtils";
-	import {notify} from "power-notifier";
 
 	let activeTab = "search";
 	let name = null;

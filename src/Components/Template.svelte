@@ -16,8 +16,10 @@
 	};
 
 	const publishTemplate = async () => {
+		//todo: mark repo as template
 		const response = await createRepository({name: template.name, authToken: SettingsRepo.getGithubToken()});
-		const repoUrl = response["html_url"];
+		const data = await response.json();
+		const repoUrl = data["html_url"];
 
 		await pushRepository({repoUrl, cwd: template.path});
 		notify({
@@ -25,7 +27,7 @@
 		});
 	};
 
-	const updateTemplateRepo = () => alert("Nt implemented yet♥");
+	const updateTemplateRepo = () => alert("Not implemented yet♥");
 
 	const remove = async () => {
 		await removeTemplate({path: template.path});

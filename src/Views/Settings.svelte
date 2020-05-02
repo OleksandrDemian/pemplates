@@ -7,7 +7,6 @@
 	let editorPath = null;
 
 	let gitToken = SettingsRepo.getGithubToken();
-	SettingsRepo.getGitToken();
 
 	const onAddEditor = async () => {
 		const editor = {
