@@ -1,7 +1,8 @@
 <script>
 	import {createProjectFromTemplate} from "../../../utils/projectsManager";
-	import { createEventDispatcher } from "svelte";
+	import {createEventDispatcher} from "svelte";
 	import {notify} from "power-notifier";
+	import Loading from "../../Components/Loading.svelte";
 
 	export let templateId = null;
 
@@ -20,7 +21,7 @@
 				description: projectDescription
 			});
 
-			if(success){
+			if (success) {
 				notify({
 					title: "New project created",
 					timeout: 2500
@@ -44,7 +45,7 @@
 </script>
 
 {#if creating}
-	<h1>Creating {projectName}</h1>
+	<Loading message="Creating {projectName}" />
 {:else}
 	<input bind:value={projectName} placeholder="Project name" />
 	<textarea bind:value={projectDescription} placeholder="*(optional) Insert description"></textarea>

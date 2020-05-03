@@ -1,6 +1,6 @@
 <script>
-	import Container from "./Container.svelte";
-	import NewTemplate from "../Sections/Templates/NewTemplate.svelte";
+	import Container from "../../Components/Container.svelte";
+	import NewTemplate from "../Templates/NewTemplate.svelte";
 
 	export let result;
 	let showCreation = false;
@@ -9,9 +9,10 @@
 <Container>
 	{ #if showCreation }
 		<NewTemplate
-			projectName={result.full_name}
-			projectPath={result.html_url + ".git"}
-			projectDescription={result.description}
+			templateName={result.full_name}
+			templatePath={result.html_url + ".git"}
+			templateDescription={result.description}
+			on:created={() => showCreation = false}
 		/>
 		<button on:click={() => showCreation = false}>Cancel</button>
 	{ :else }

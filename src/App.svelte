@@ -50,7 +50,7 @@
 		<Search />
 	{:else if activeTab === "new"}
 		<h1>New Template</h1>
-		<NewTemplate projectName={name} projectPath={path} />
+		<NewTemplate templateName={name} templatePath={path} />
 	{:else if activeTab === "settings"}
 		<h1>Settings</h1>
 		<Settings />
@@ -67,7 +67,7 @@
 		vertical-align: top;
 		padding: 10px;
 		width: 25%;
-		min-width: 250px;
+		min-width: 200px;
 	}
 
 	#content {

@@ -1,11 +1,11 @@
 <script>
 	import NewTemplate from "../Sections/Templates/NewTemplate.svelte";
 
-	export let projectName;
-	export let projectPath;
+	export let templateName;
+	export let templatePath;
 </script>
 
 <NewTemplate
-	projectName={projectName}
-	projectPath={projectPath}
+	templateName={templateName}
+	templatePath={templatePath}
 />
