@@ -18,6 +18,8 @@
 		const data = await response.json();
 		const repoUrl = data["html_url"];
 
+		//todo: add template topic /repos/:owner/:repo/topics
+
 		await pushRepository({repoUrl, cwd: template.path});
 		template.remote = true;
 		template.path = repoUrl;

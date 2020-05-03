@@ -9,6 +9,7 @@ const addProject = async project => {
 	PROJECTS_SETTINGS.write();
 	
 	update(projects => [...projects, project]);
+	console.log(PROJECTS_SETTINGS.get());
 };
 
 const getProject = id => {
@@ -58,5 +59,6 @@ export default {
 	addProject,
 	getProject,
 	has,
-	removeProject
+	removeProject,
+	getProjects: () => PROJECTS_SETTINGS.get()
 }
