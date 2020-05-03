@@ -1,9 +1,9 @@
 <script>
-	import ProjectsRepo from "../../stores/projectsRepo";
-	import EditorsRepo from "../../stores/editorsRepo";
-	import EditorsSelect from "./EditorsSelect.svelte";
-	import Container from "./Container.svelte";
-	import {removeProject} from "../../utils/projectsManager";
+	import ProjectsRepo from "../../../stores/projectsRepo";
+	import EditorsRepo from "../../../stores/editorsRepo";
+	import EditorsSelect from "../../Components/EditorsSelect.svelte";
+	import Container from "../../Components/Container.svelte";
+	import {removeProject} from "../../../utils/projectsManager";
 
 	export let project = null;
 	export let selectedEditorId = null;
@@ -30,6 +30,10 @@
 <Container>
 	<p><b>{project.name}:</b> {project.id}</p>
 	<p>{project.path}</p>
+	{ #if project.description }
+		<p>{project.description}</p>
+	{ /if }
+
 	<button on:click={remove}>Remove</button>
 	<button on:click={openFolder}>Open in explorer</button>
 	<button on:click={open}>Open in editor</button>

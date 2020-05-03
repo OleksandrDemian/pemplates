@@ -1,4 +1,3 @@
-import {notify} from "power-notifier";
 import TemplatesRepo from "../stores/templatesRepo";
 import ProjectsRepo from "../stores/projectsRepo";
 import {generateIdFromName} from "./utils";
@@ -11,13 +10,13 @@ export const removeProject = ({ path }) => {
 	fse.removeSync(path);
 };
 
-export const createProjectFromTemplate = async ({ name, id }) => {
+export const createProjectFromTemplate = async ({ name, templateId, description }) => {
 	if(ProjectsRepo.has(name)){
 		if(!confirm("Project with this name already exists, would you like to override it?"))
 			return false;
 	}
 	
-	const template = TemplatesRepo.getTemplate(id);
+	const template = TemplatesRepo.getTemplate(templateId);
 	//todo: projects with same names will be overridden
 	const targetPath = _path.join(__dirname, PROJECTS_PATH, name);
 	const srcPath = _path.join(__dirname, TEMPLATES_PATH, template.name);
@@ -28,16 +27,11 @@ export const createProjectFromTemplate = async ({ name, id }) => {
 	const project = {
 		path: targetPath,
 		name: name,
+		description,
 		id: generateIdFromName(template.name),
-		templateId: id
+		templateId: templateId
 	};
 	
 	await ProjectsRepo.addProject(project);
-	
-	notify({
-		title: "New project created",
-		timeout: 2500
-	});
-
 	return project;
 };

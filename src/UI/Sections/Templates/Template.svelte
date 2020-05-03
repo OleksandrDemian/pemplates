@@ -1,20 +1,16 @@
 <script>
-	import TemplatesRepo from "../../stores/templatesRepo";
-	import SettingsRepo from "../../stores/settingsRepo";
-	import {createProjectFromTemplate} from "../../utils/projectsManager";
-	import {removeTemplate} from "../../utils/templatesManager";
+	import TemplatesRepo from "../../../stores/templatesRepo";
+	import SettingsRepo from "../../../stores/settingsRepo";
+	import {removeTemplate} from "../../../utils/templatesManager";
 	import {notify} from "power-notifier";
-	import {createRepository, pushRepository} from "../../utils/gitUtils";
-	import Container from "./Container.svelte";
+	import {createRepository, pushRepository} from "../../../utils/gitUtils";
+	import Container from "../../Components/Container.svelte";
+	import LocalTemplate from "./LocalTemplate.svelte";
+	import RemoteTemplate from "./RemoteTemplate.svelte";
+	import NewProject from "../Project/NewProjectFromTemplate.svelte";
 
 	export let template;
 	let creatingProject = false;
-
-	const createProject = async () => {
-		creatingProject = true;
-		await createProjectFromTemplate({ name: template.name, id: template.id });
-		creatingProject = false;
-	};
 
 	const publishTemplate = async () => {
 		//todo: mark repo as template
@@ -56,27 +52,28 @@
 
 <Container>
 	{#if creatingProject}
-		<h3>Creating project</h3>
+		<NewProject
+			projectName={template.name}
+			projectDescription={template.description}
+			templateId={template.id}
+			on:created={() => creatingProject = false}
+			on:cancel={() => creatingProject = false}
+		/>
 	{:else}
-		<h3>{template.name}</h3>
-		{ #if template.description }
-			<p>{template.description}</p>
-		{ /if }
-
 		{ #if template.remote }
-			<p><b>Remote:</b> <a href={template.originalPath}>{template.originalPath}</a></p>
+			<RemoteTemplate
+				template={template}
+				on:createProject={() => creatingProject = true}
+				on:updateTemplateRepo={updateTemplateRepo}
+				on:removeTemplate={remove}
+			/>
 		{:else}
-			<p><b>Local</b></p>
+			<LocalTemplate
+				template={template}
+				on:createProject={ () => creatingProject = true }
+				on:publishTemplate={publishTemplate}
+				on:removeTemplate={remove}
+			/>
 		{/if}
-
-		<button on:click={createProject}>Create project</button>
-
-		{ #if template.remote }
-			<button on:click={updateTemplateRepo}>Update template from repository</button>
-		{:else}
-			<button on:click={publishTemplate}>Publish template on Github</button>
-		{/if}
-
-		<button on:click={remove}>Remove template</button>
 	{/if}
 </Container>

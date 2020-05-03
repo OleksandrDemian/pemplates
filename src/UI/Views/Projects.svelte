@@ -1,6 +1,6 @@
 <script>
 	import projectsRepo from "../../stores/projectsRepo";
-	import Project from "../Components/Project.svelte";
+	import Project from "../Sections/Project/Project.svelte";
 </script>
 
 <div id="projectsList">

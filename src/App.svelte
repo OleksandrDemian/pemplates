@@ -2,7 +2,7 @@
 	import Projects from "./UI/Views/Projects.svelte";
 	import Templates from "./UI/Views/Templates.svelte";
 	import Search from "./UI/Views/Search.svelte";
-	import NewTemplate from "./UI/Views/NewTemplate.svelte";
+	import NewTemplate from "./UI/Views/New.svelte";
 
 	import {onMount, onDestroy} from "svelte";
 	import {addListener, removeListener} from "./utils/dropListener";
