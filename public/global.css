@@ -6,10 +6,10 @@
 }
 
 :root [day] {
-	--background: white;
-	--surface: #fafafa;
+	--background: #fafafa;
+	--surface: white;
 	--primary: black;
-	--secondary: black;
+	--secondary: #fd5523;
 }
 
 :root [wave] {
@@ -42,6 +42,10 @@ html, body {
 
 .secondary-color {
 	color: var(--secondary);
+}
+
+.cursor {
+	cursor: pointer;
 }
 
 /*background: linear-gradient(180deg, var(--background) 85%, var(--secondary) 100%);*/
