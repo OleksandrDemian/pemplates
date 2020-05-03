@@ -1,6 +1,6 @@
 <script>
-	import templates from "src/stores/templatesRepo";
-	import Template from "src/UI/Components/Template.svelte";
+	import templates from "../../stores/templatesRepo";
+	import Template from "../Components/Template.svelte";
 </script>
 
 <div id="templatesList">

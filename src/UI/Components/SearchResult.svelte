@@ -1,6 +1,6 @@
 <script>
-	import Container from "src/UI/Components/Container.svelte";
-	import NewTemplate from "src/UI/Views/NewTemplate.svelte";
+	import Container from "./Container.svelte";
+	import NewTemplate from "../Views/NewTemplate.svelte";
 
 	export let result;
 	let showCreation = false;

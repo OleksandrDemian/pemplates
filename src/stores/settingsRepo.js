@@ -1,4 +1,4 @@
-import {SETTINGS as _SETTINGS} from "src/settings/settings";
+import {SETTINGS as _SETTINGS} from "../settings/settings";
 
 const SETTINGS = _SETTINGS("settings.json", {
 	githubToken: null

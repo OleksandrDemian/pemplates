@@ -1,11 +1,11 @@
 <script>
-	import TemplatesRepo from "src/stores/templatesRepo";
-	import SettingsRepo from "src/stores/settingsRepo";
-	import {createProjectFromTemplate} from "src/utils/projectsManager";
-	import {removeTemplate} from "src/utils/templatesManager";
+	import TemplatesRepo from "../../stores/templatesRepo";
+	import SettingsRepo from "../../stores/settingsRepo";
+	import {createProjectFromTemplate} from "../../utils/projectsManager";
+	import {removeTemplate} from "../../utils/templatesManager";
 	import {notify} from "power-notifier";
-	import {createRepository, pushRepository} from "src/utils/gitUtils";
-	import Container from "src/UI/Components/Container.svelte";
+	import {createRepository, pushRepository} from "../../utils/gitUtils";
+	import Container from "./Container.svelte";
 
 	export let template;
 	let creatingProject = false;

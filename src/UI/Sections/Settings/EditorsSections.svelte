@@ -1,6 +1,6 @@
 <script>
-	import EditorsRepo from "src/stores/editorsRepo";
-	import {generateIdFromName} from "src/utils/utils";
+	import EditorsRepo from "../../../stores/editorsRepo";
+	import {generateIdFromName} from "../../../utils/utils";
 
 	let editorName = null;
 	let editorPath = null;

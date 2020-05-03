@@ -1,15 +1,15 @@
 <script>
-	import ProjectsRepo from "src/stores/projectsRepo";
-	import EditorsRepo from "src/stores/editorsRepo";
-	import {removeProject} from "src/utils/projectsManager";
-	import Container from "src/UI/Components/Container.svelte";
-	import EditorsSelect from "src/UI/Components/EditorsSelect.svelte";
+	import ProjectsRepo from "../../stores/projectsRepo";
+	import EditorsRepo from "../../stores/editorsRepo";
+	import EditorsSelect from "./EditorsSelect.svelte";
+	import Container from "./Container.svelte";
+	import {removeProject} from "../../utils/projectsManager";
 
 	export let project = null;
 	export let selectedEditorId = null;
 
 	const remove = async () => {
-		await removeProject({path: project.path});
+		await removeProject({ path: project.path });
 		await ProjectsRepo.removeProject(project.id);
 	};
 
