@@ -3,7 +3,7 @@
 	import SettingsRepo from "../../../stores/settingsRepo";
 	import {removeTemplate} from "../../../utils/templatesManager";
 	import {notify} from "power-notifier";
-	import {createRepository, pushRepository} from "../../../utils/gitUtils";
+	import {createRepository, pushRepository, updateTopics} from "../../../utils/gitUtils";
 	import Container from "../../Components/Container.svelte";
 	import LocalTemplate from "./LocalTemplate.svelte";
 	import RemoteTemplate from "./RemoteTemplate.svelte";
@@ -14,17 +14,24 @@
 
 	const publishTemplate = async () => {
 		//todo: mark repo as template
-		const response = await createRepository({name: template.name, authToken: SettingsRepo.getGithubToken()});
+		const response = await createRepository({
+			name: template.name,
+			description: template.description,
+			authToken: SettingsRepo.getGithubToken()
+		});
 		const data = await response.json();
 		const repoUrl = data["html_url"];
 
-		//todo: add template topic /repos/:owner/:repo/topics
+		await updateTopics({
+			owner: data.owner.login,
+			repo: data.name,
+			authToken: SettingsRepo.getGithubToken()
+		});
 
 		await pushRepository({repoUrl, cwd: template.path});
 		template.remote = true;
-		template.path = repoUrl;
+		template.originalPath = repoUrl;
 
-		//todo: test updateTemplate
 		await TemplatesRepo.updateTemplate(template.id, template);
 
 		notify({
@@ -35,7 +42,7 @@
 	const updateTemplateRepo = () => alert("Not implemented yet♥");
 
 	const remove = async () => {
-		//save props before deleting template, as notify will refer new template (svelte render)
+		//save props before deleting template, as notify will refer to a new template (svelte render)
 		const name = template.name;
 		const path = template.path;
 		const id = template.id;
