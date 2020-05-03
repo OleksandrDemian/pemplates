@@ -1,7 +1,7 @@
-import { notify } from "power-notifier";
+import {notify} from "power-notifier";
 import TemplatesRepo from "../stores/templatesRepo";
 import {generateIdFromName} from "./utils";
-import {fse, _path} from "../requires";
+import {_path, fse} from "../requires";
 import {execShellCommand} from "./shellUtils";
 
 const TEMPLATES_PATH = "/.Pemplates/templates/";

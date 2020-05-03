@@ -1,5 +1,5 @@
 <script>
-	import templates from "../stores/templatesRepo";
+	import templates from "../../stores/templatesRepo";
 	import Template from "../Components/Template.svelte";
 </script>
 

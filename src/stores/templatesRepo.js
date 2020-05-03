@@ -1,5 +1,5 @@
 import {ARRAY_SETTINGS} from "../settings/settings";
-import { writable } from 'svelte/store';
+import {writable} from 'svelte/store';
 
 const TEMPLATE_SETTINGS = ARRAY_SETTINGS("templates.json", []);
 const { subscribe, set, update } = writable([...TEMPLATE_SETTINGS.get()]);

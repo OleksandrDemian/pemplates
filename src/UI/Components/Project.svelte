@@ -1,9 +1,9 @@
 <script>
-	import ProjectsRepo from "../stores/projectsRepo";
-	import EditorsRepo from "../stores/editorsRepo";
+	import ProjectsRepo from "../../stores/projectsRepo";
+	import EditorsRepo from "../../stores/editorsRepo";
 	import EditorsSelect from "./EditorsSelect.svelte";
 	import Container from "./Container.svelte";
-	import {removeProject} from "../utils/projectsManager";
+	import {removeProject} from "../../utils/projectsManager";
 
 	export let project = null;
 	export let selectedEditorId = null;

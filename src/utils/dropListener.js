@@ -1,5 +1,3 @@
-import templates from "../stores/templatesRepo";
-
 const listeners = [];
 
 export const addListener = l => {

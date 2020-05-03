@@ -1,12 +1,12 @@
 <script>
-	import Projects from "./Views/Projects.svelte";
-	import Templates from "./Views/Templates.svelte";
-	import Search from "./Views/Search.svelte";
-	import NewTemplate from "./Views/NewTemplate.svelte";
+	import Projects from "./UI/Views/Projects.svelte";
+	import Templates from "./UI/Views/Templates.svelte";
+	import Search from "./UI/Views/Search.svelte";
+	import NewTemplate from "./UI/Views/NewTemplate.svelte";
 
 	import {onMount, onDestroy} from "svelte";
 	import {addListener, removeListener} from "./utils/dropListener";
-	import Settings from "./Views/Settings.svelte";
+	import Settings from "./UI/Views/Settings.svelte";
 
 	let activeTab = "search";
 	let name = null;
