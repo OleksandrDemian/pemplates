@@ -5,6 +5,7 @@
 	export let result;
 	let showCreation = false;
 </script>
+
 <Container>
 	{ #if showCreation }
 		<NewTemplate
@@ -15,12 +16,12 @@
 		<button on:click={() => showCreation = false}>Cancel</button>
 	{ :else }
 		<h3>
-			<a href="{result.html_url}" target="_blank">{result.full_name}</a>
+			<a href="{result.html_url}" target="_blank">{result.name}</a>
 			by
 			<span class="secondary-color">{result.owner.login}</span>
 		</h3>
 		<p>{result.description}</p>
 		<button on:click={() => showCreation = true}>Download template</button>
-		<button on:click={() => alert("Not implemented yet♥")}>Create project</button>
+<!--		<button on:click={() => alert("Not implemented yet♥")}>Create project</button>-->
 	{ /if }
 </Container>

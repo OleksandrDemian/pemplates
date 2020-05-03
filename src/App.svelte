@@ -58,6 +58,10 @@
 </div>
 
 <style>
+	h3 {
+		display: table;
+	}
+
 	#navigation {
 		display: inline-block;
 		vertical-align: top;
