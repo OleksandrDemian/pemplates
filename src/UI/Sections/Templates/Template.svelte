@@ -13,7 +13,6 @@
 	let creatingProject = false;
 
 	const publishTemplate = async () => {
-		//todo: mark repo as template
 		const response = await createRepository({
 			name: template.name,
 			description: template.description,

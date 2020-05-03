@@ -54,11 +54,28 @@ const has = (name) => {
 	return false;
 };
 
+const updateProject = async (id, data) => {
+	const projects = PROJECTS_SETTINGS.get();
+	
+	for(let i = 0; i < projects.length; i++){
+		if(projects[i].id === id){
+			projects[i] = data;
+			PROJECTS_SETTINGS.set(projects);
+			await PROJECTS_SETTINGS.write();
+			set(projects);
+			
+			return true;
+		}
+	}
+	
+	return false;
+};
+
 export default {
 	subscribe,
 	addProject,
 	getProject,
 	has,
 	removeProject,
-	getProjects: () => PROJECTS_SETTINGS.get()
+	updateProject
 }

@@ -4,9 +4,11 @@
 	import EditorsSelect from "../../Components/EditorsSelect.svelte";
 	import Container from "../../Components/Container.svelte";
 	import {removeProject} from "../../../utils/projectsManager";
+	import {execShellCommand, openFileExplorer} from "../../../utils/shellUtils";
+	import {notify} from "power-notifier";
 
 	export let project = null;
-	export let selectedEditorId = null;
+	export let selectedEditorId = project ? project.editorId : null;
 
 	const remove = async () => {
 		await removeProject({ path: project.path });
@@ -14,16 +16,22 @@
 	};
 
 	const openFolder = () => {
-		//todo: redo
-		window.require("electron").shell.openItem(project.path);
+		openFileExplorer(project.path);
 	};
 
-	const open = () => {
-		//todo: redo everything
-		//todo: link ide to project
+	const open = async () => {
+		project.editorId = selectedEditorId;
+		await ProjectsRepo.updateProject(project.id, project);
 		const editor = EditorsRepo.getEditor(selectedEditorId);
-		const exec = window.require('child_process').exec;
-		exec(`"${editor.path}" "${project.path}"`);
+		if(editor != null){
+			await execShellCommand(`"${editor.path}" "${project.path}"`);
+		} else {
+			notify({
+				title: "Select IDE",
+				timeout: 3000,
+				applyStyle: "error"
+			});
+		}
 	};
 </script>
 

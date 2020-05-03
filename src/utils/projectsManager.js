@@ -17,7 +17,6 @@ export const createProjectFromTemplate = async ({ name, templateId, description 
 	}
 	
 	const template = TemplatesRepo.getTemplate(templateId);
-	//todo: projects with same names will be overridden
 	const targetPath = _path.join(__dirname, PROJECTS_PATH, name);
 	const srcPath = _path.join(__dirname, TEMPLATES_PATH, template.name);
 	
@@ -29,7 +28,8 @@ export const createProjectFromTemplate = async ({ name, templateId, description 
 		name: name,
 		description,
 		id: generateIdFromName(template.name),
-		templateId: templateId
+		templateId: templateId,
+		editorId: null
 	};
 	
 	await ProjectsRepo.addProject(project);

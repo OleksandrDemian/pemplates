@@ -1,4 +1,4 @@
-import {childProcess} from "../requires";
+import {childProcess, electron} from "../requires";
 
 export const execShellCommand = (cmd) => {
 	return new Promise((resolve, reject) => {
@@ -10,4 +10,8 @@ export const execShellCommand = (cmd) => {
 			resolve(stdout? stdout : stderr);
 		});
 	});
+};
+
+export const openFileExplorer = (path) => {
+	electron.shell.openItem(path);
 };
