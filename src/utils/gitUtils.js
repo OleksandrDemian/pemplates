@@ -1,4 +1,4 @@
-import {childProcess} from "../requires";
+import {childProcess} from "src/requires";
 
 export const createRepository = async ({ name, authToken }) => {
 	return fetch("https://api.github.com/user/repos", {

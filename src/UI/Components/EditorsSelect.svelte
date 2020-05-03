@@ -1,5 +1,5 @@
 <script>
-	import editors from "../../stores/editorsRepo";
+	import editors from "src/stores/editorsRepo";
 
 	export let value = null;
 </script>

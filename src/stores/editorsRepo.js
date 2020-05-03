@@ -1,5 +1,6 @@
-import {ARRAY_SETTINGS} from "../settings/settings";
+
 import {writable} from 'svelte/store';
+import {ARRAY_SETTINGS} from "src/settings/settings";
 
 const EDITORS_SETTINGS = ARRAY_SETTINGS("editors.json", []);
 const { subscribe, set, update } = writable([...EDITORS_SETTINGS.get()]);

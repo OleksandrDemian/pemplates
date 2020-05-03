@@ -1,4 +1,4 @@
-import {childProcess} from "../requires";
+import {childProcess} from "src/requires";
 
 export const execShellCommand = (cmd) => {
 	return new Promise((resolve, reject) => {

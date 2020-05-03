@@ -1,4 +1,4 @@
-import {_path, fse} from "../requires";
+import {_path, fse} from "src/requires";
 
 const SETTINGS_PATH = "/.Pemplates/settings";
 

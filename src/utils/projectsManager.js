@@ -1,8 +1,8 @@
 import {notify} from "power-notifier";
-import TemplatesRepo from "../stores/templatesRepo";
-import ProjectsRepo from "../stores/projectsRepo";
-import {generateIdFromName} from "./utils";
-import {_path, fse} from "../requires";
+import TemplatesRepo from "src/stores/templatesRepo";
+import ProjectsRepo from "src/stores/projectsRepo";
+import {generateIdFromName} from "src/utils/utils";
+import {_path, fse} from "src/requires";
 
 const TEMPLATES_PATH = "/.Pemplates/templates/";
 const PROJECTS_PATH = "/.Pemplates/projects/";

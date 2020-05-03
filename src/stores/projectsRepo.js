@@ -1,5 +1,5 @@
-import {ARRAY_SETTINGS} from "../settings/settings";
 import {writable} from 'svelte/store';
+import {ARRAY_SETTINGS} from "src/settings/settings";
 
 const PROJECTS_SETTINGS = ARRAY_SETTINGS("projects.json", []);
 const { subscribe, set, update } = writable([...PROJECTS_SETTINGS.get()]);

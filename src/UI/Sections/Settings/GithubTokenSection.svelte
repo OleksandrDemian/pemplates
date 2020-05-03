@@ -1,5 +1,5 @@
 <script>
-	import SettingsRepo from "../../../stores/settingsRepo";
+	import SettingsRepo from "src/stores/settingsRepo";
 
 	let gitToken = SettingsRepo.getGithubToken();
 

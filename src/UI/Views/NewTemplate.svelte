@@ -1,5 +1,5 @@
 <script>
-	import { createTemplate } from "../../utils/templatesManager";
+	import { createTemplate } from "src/utils/templatesManager";
 
 	export let projectName;
 	export let projectPath;

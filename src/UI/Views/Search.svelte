@@ -1,5 +1,5 @@
 <script>
-	import SearchResult from "../Components/SearchResult.svelte";
+	import SearchResult from "src/UI/Components/SearchResult.svelte";
 
     let search_value = null;
     let result = null;
