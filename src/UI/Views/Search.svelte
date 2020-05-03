@@ -12,7 +12,7 @@
 		//todo: topic:boilerplate+topic:starter-kit
 		isSearching = true;
 		try {
-			const url = `https://api.github.com/search/repositories?q=${search_value}+topic:template`;
+			const url = `https://api.github.com/search/repositories?q=${search_value}+topic:template&sort=stars`;
 			const response = (await fetch(url));
 			const data = await response.json();
 			result = data.items;
