@@ -21,8 +21,8 @@ export const createProjectFromTemplate = async ({ name, templateId, description 
 	const targetPath = _path.join(__dirname, PROJECTS_PATH, name);
 	const srcPath = _path.join(__dirname, TEMPLATES_PATH, template.name);
 	
-	await fse.ensureDirSync(targetPath);
-	await fse.copySync(srcPath, targetPath);
+	await fse.ensureDir(targetPath);
+	await fse.copy(srcPath, targetPath);
 	
 	const project = {
 		path: targetPath,
