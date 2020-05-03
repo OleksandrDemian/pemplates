@@ -13,29 +13,38 @@
 	let creatingProject = false;
 
 	const publishTemplate = async () => {
-		const response = await createRepository({
-			name: template.name,
-			description: template.description,
-			authToken: SettingsRepo.getGithubToken()
-		});
-		const data = await response.json();
-		const repoUrl = data["html_url"];
+		try {
+			const response = await createRepository({
+				name: template.name,
+				description: template.description,
+				authToken: SettingsRepo.getGithubToken()
+			});
+			const data = await response.json();
+			const repoUrl = data["html_url"];
 
-		await updateTopics({
-			owner: data.owner.login,
-			repo: data.name,
-			authToken: SettingsRepo.getGithubToken()
-		});
+			await updateTopics({
+				owner: data.owner.login,
+				repo: data.name,
+				authToken: SettingsRepo.getGithubToken()
+			});
 
-		await pushRepository({repoUrl, cwd: template.path});
-		template.remote = true;
-		template.originalPath = repoUrl;
+			await pushRepository({repoUrl, cwd: template.path});
+			template.remote = true;
+			template.originalPath = repoUrl;
 
-		await TemplatesRepo.updateTemplate(template.id, template);
+			await TemplatesRepo.updateTemplate(template.id, template);
 
-		notify({
-			title: "Template published successfully"
-		});
+			notify({
+				title: "Template published successfully"
+			});
+		} catch (e) {
+			console.error(e);
+			notify({
+				title: "Error",
+				message: "Make sure you have internet connection and git installed with PATH value defined in your OS",
+				applyStyle: "error"
+			});
+		}
 	};
 
 	const updateTemplateRepo = () => alert("Not implemented yet♥");

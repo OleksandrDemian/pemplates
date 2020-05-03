@@ -27,12 +27,7 @@ export const updateTopics = ({ owner, repo, authToken }) => {
 			"Accept": "application/vnd.github.mercy-preview+json"
 		},
 		body: JSON.stringify({
-			names: [
-				"template",
-				"pemplates",
-				"boilerplate",
-				"starter-kit",
-			]
+			names: [ "template", "pemplates", "boilerplate", "starter-kit", ]
 		})
 	});
 };

@@ -1,5 +1,6 @@
 <script>
 	import { createTemplate } from "../../../utils/templatesManager";
+	import {notify} from "power-notifier";
 
 	export let projectName;
 	export let projectPath;
@@ -9,12 +10,32 @@
 
 	const onCreateTemplate = async () => {
 		creating = true;
-		await createTemplate({
-			name: projectName,
-			path: projectPath,
-			description: projectDescription
-		});
-		creating = false
+		try {
+			await createTemplate({
+				name: projectName,
+				path: projectPath,
+				description: projectDescription
+			});
+
+			notify({
+				title: "Template created successfully",
+				message: projectName + " was added to your templates",
+				timeout: 2500
+			});
+
+			projectName = null;
+			projectPath = null;
+			projectDescription = null;
+		} catch (e) {
+			console.error(e);
+			notify({
+				title: "Error",
+				message: "Something went wrong",
+				applyStyle: "error"
+			});
+		}
+
+		creating = false;
 	};
 </script>
 

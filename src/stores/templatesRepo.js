@@ -9,6 +9,8 @@ const addTemplate = async template => {
 	await TEMPLATE_SETTINGS.write();
 	
 	update(templates => [...templates, template]);
+	
+	return template;
 };
 
 const getTemplate = id => {

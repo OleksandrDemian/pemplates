@@ -13,21 +13,31 @@
 
 	const onCreateTemplate = async () => {
 		creating = true;
-		const success = await createProjectFromTemplate({
-			name: projectName,
-			templateId,
-			description: projectDescription
-		});
-		creating = false;
-
-		if(success){
-			notify({
-				title: "New project created",
-				timeout: 2500
+		try {
+			const success = await createProjectFromTemplate({
+				name: projectName,
+				templateId,
+				description: projectDescription
 			});
 
-			dispatcher("created");
+			if(success){
+				notify({
+					title: "New project created",
+					timeout: 2500
+				});
+
+				dispatcher("created");
+			}
+		} catch (e) {
+			console.error(e);
+			notify({
+				title: "Error",
+				applyStyle: "error",
+				timeout: 2500
+			});
 		}
+
+		creating = false;
 	};
 
 	const onCancel = () => dispatcher("cancel");
