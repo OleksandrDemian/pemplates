@@ -25,14 +25,10 @@ export const createTemplate = async ({name, path, description}) => {
 	let remote = false;
 	if(isGit(path)){
 		remote = true;
-		await execShellCommand(`git clone "${path}" "${targetPath}"`);
+		await cloneGitRepository(path, targetPath);
 	} else {
-		await fse.ensureDir(targetPath);
-		await fse.copy(path, targetPath);
+		await cloneLocalRepository(path, targetPath);
 	}
-	
-	//remove git integration
-	await fse.remove(_path.join(targetPath, "/.git"));
 	
 	return await TemplatesRepo.addTemplate({
 		name,
@@ -42,4 +38,16 @@ export const createTemplate = async ({name, path, description}) => {
 		description,
 		remote
 	});
+};
+
+export const cloneGitRepository = async (repoUrl, targetPath) => {
+	await fse.remove(targetPath);
+	await execShellCommand(`git clone "${repoUrl}" "${targetPath}"`);
+	await fse.remove(_path.join(targetPath, "/.git"));
+};
+
+export const cloneLocalRepository = async (path, targetPath) => {
+	await fse.ensureDir(targetPath);
+	await fse.copy(path, targetPath);
+	await fse.remove(_path.join(targetPath, "/.git"));
 };
