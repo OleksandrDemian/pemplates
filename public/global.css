@@ -6,6 +6,13 @@
 }
 
 :root [day] {
+	--background: #e6e6e6;
+	--surface: white;
+	--primary: #2c3e50;
+	--secondary: #2c3e50;
+}
+
+:root [day-red] {
 	--background: #fafafa;
 	--surface: white;
 	--primary: black;

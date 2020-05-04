@@ -15,6 +15,7 @@
 	const onCreateTemplate = async () => {
 		dispatcher("startCreating");
 		creating = true;
+		//todo: check values
 		try {
 			await createTemplate({
 				name: templateName,
