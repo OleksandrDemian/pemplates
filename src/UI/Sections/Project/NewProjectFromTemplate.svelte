@@ -12,7 +12,23 @@
 	const dispatcher = createEventDispatcher();
 	let creating = false;
 
+	const checkParams = () => {
+		if(projectName == null || projectName.length < 1){
+			notify({
+				title: "Name is required",
+				applyStyle: "error"
+			});
+			return false;
+		}
+
+		return true;
+	};
+
 	const onCreateTemplate = async () => {
+		if(!checkParams()){
+			return false;
+		}
+
 		creating = true;
 		try {
 			const success = await createProjectFromTemplate({

@@ -50,6 +50,10 @@
 	const updateTemplateRepo = () => alert("Not implemented yet♥");
 
 	const remove = async () => {
+		if(!confirm(`Are you sure you want to delete ${template.name} and all of it's files from your system?`)){
+			return false;
+		}
+
 		//save props before deleting template, as notify will refer to a new template (svelte render)
 		const name = template.name;
 		const path = template.path;

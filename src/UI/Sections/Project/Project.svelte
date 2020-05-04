@@ -11,8 +11,10 @@
 	export let selectedEditorId = project ? project.editorId : null;
 
 	const remove = async () => {
-		await removeProject({ path: project.path });
-		await ProjectsRepo.removeProject(project.id);
+		if(confirm(`Are you sure you want to delete ${project.name} and all of it's files from your system?`)){
+			await removeProject({ path: project.path });
+			await ProjectsRepo.removeProject(project.id);
+		}
 	};
 
 	const openFolder = () => {

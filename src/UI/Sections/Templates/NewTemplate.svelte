@@ -12,10 +12,32 @@
 
 	let dispatcher = createEventDispatcher();
 
+	const checkParams = () => {
+		if(templateName == null || templateName.length < 1){
+			notify({
+				title: "Template name is required",
+				applyStyle: "error"
+			});
+			return false;
+		} else if(templatePath == null || templatePath.length < 1){
+			notify({
+				title: "Path is required",
+				applyStyle: "error"
+			});
+			return false;
+		}
+
+		return true;
+	};
+
 	const onCreateTemplate = async () => {
+		if(!checkParams()){
+			return false;
+		}
+
 		dispatcher("startCreating");
 		creating = true;
-		//todo: check values
+
 		try {
 			await createTemplate({
 				name: templateName,
@@ -36,7 +58,7 @@
 			console.error(e);
 			notify({
 				title: "Error",
-				message: "Something went wrong",
+				message: "Possible problems: git is not installed, path is wrong",
 				applyStyle: "error"
 			});
 		}
@@ -49,8 +71,15 @@
 {#if creating}
 	<Loading message="Creating {templateName}" />
 {:else}
+	<label>How to create new template:</label>
+	<ul>
+		<li>Drop folder</li>
+		<li>Write/paste local path</li>
+		<li>Write/paste Github repo (with .git)</li>
+	</ul>
+
+	<input bind:value={templatePath} placeholder="Template path/url" />
 	<input bind:value={templateName} placeholder="Template name" />
-	<input bind:value={templatePath} placeholder="Drop folder or write/copy url/path fo a project to use as template" />
 	<textarea bind:value={templateDescription} placeholder="*(optional) Insert description"></textarea>
 	<button on:click={onCreateTemplate}>Create</button>
 {/if}
