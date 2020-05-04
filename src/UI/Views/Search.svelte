@@ -3,14 +3,26 @@
 	import {notify} from "power-notifier";
 	import Loading from "../Components/Loading.svelte";
 
+	/*
+	use search value to bind input and filter to show in case of null result
+	 */
 	let search_value = null;
+	let filter_value = null;
 	let result = null;
 
 	let isSearching = false;
 
+	const onKeyUp = (e) => {
+		//enter -> 13
+		if(e.keyCode === 13){
+			search();
+		}
+	};
+
 	const search = async () => {
 		//todo: topic:boilerplate+topic:starter-kit
 		isSearching = true;
+		filter_value = search_value;
 		try {
 			const url = `https://api.github.com/search/repositories?q=${search_value}+topic:template&sort=stars`;
 			const response = (await fetch(url));
@@ -29,7 +41,7 @@
 	}
 </script>
 
-<input type="text" placeholder="Search for templates on GitHub" bind:value={search_value} />
+<input type="text" placeholder="Search for templates on GitHub" bind:value={search_value} on:keyup={onKeyUp} />
 <button on:click={search}>Search</button>
 
 <div id="searchResult">
@@ -42,7 +54,7 @@
                     <SearchResult result={searchResult} />
                 {/each}
             {:else}
-                <h3>There are no project templates for <b>"{search_value}"</b></h3>
+                <h3>There are no project templates for <b>"{filter_value}"</b></h3>
                 <p>
                     If you are sure there are, please let know to it's owner to mark it as template.
                     Meanwhile, you can import it manually from "New" section.
