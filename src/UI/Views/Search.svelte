@@ -2,6 +2,7 @@
 	import SearchResult from "../Sections/Search/SearchResult.svelte";
 	import {notify} from "power-notifier";
 	import Loading from "../Components/Loading.svelte";
+	import {createEventDispatcher} from "svelte";
 
 	/*
 	use search value to bind input and filter to show in case of null result
@@ -9,6 +10,7 @@
 	let search_value = null;
 	let filter_value = null;
 	let result = null;
+	let dispatcher = createEventDispatcher();
 
 	let isSearching = false;
 
@@ -51,7 +53,10 @@
         { #if result != null }
             { #if result.length > 0 }
                 {#each result as searchResult (searchResult.full_name)}
-                    <SearchResult result={searchResult} />
+                    <SearchResult
+							result={searchResult}
+							on:showTemplate
+					/>
                 {/each}
             {:else}
                 <h3>There are no project templates for <b>"{filter_value}"</b></h3>

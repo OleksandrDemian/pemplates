@@ -12,6 +12,7 @@
 	let activeTab = "search";
 	let name = null;
 	let path = null;
+	let filter = null;
 
 	const dropListener = (e) => {
 		activeTab = "new";
@@ -23,6 +24,12 @@
 		activeTab = tab;
 		name = null;
 		path = null;
+		filter = null;
+	};
+
+	const showTemplate = (e) => {
+		filter = e.detail.name;
+		activeTab = "templates";
 	};
 
 	onMount(() => addListener(dropListener));
@@ -44,10 +51,10 @@
 		<Projects />
 	{:else if activeTab === "templates"}
 		<h1>Templates</h1>
-		<Templates />
+		<Templates filterValue={filter} />
 	{:else if activeTab === "search"}
 		<h1>Search</h1>
-		<Search />
+		<Search on:showTemplate={showTemplate} />
 	{:else if activeTab === "new"}
 		<h1>New Template</h1>
 		<NewTemplate templateName={name} templatePath={path} />

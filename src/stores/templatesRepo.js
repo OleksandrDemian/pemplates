@@ -25,6 +25,20 @@ const getTemplate = id => {
 	return null;
 };
 
+const getGitTemplate = gitUrl => {
+	const templates = TEMPLATE_SETTINGS.get();
+	
+	for(let i = 0; i < templates.length; i++){
+		if(templates[i].remote){
+			if(templates[i].originalPath === gitUrl){
+				return templates[i];
+			}
+		}
+	}
+	
+	return null;
+};
+
 const removeTemplate = async (id) => {
 	const templates = TEMPLATE_SETTINGS.get();
 	
@@ -77,5 +91,6 @@ export default {
 	getTemplate,
 	updateTemplate,
 	removeTemplate,
-	has
+	has,
+	getGitTemplate
 }

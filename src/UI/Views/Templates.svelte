@@ -2,8 +2,10 @@
 	import templates from "../../stores/templatesRepo";
 	import Template from "../Sections/Templates/Template.svelte";
 
+	export let filterValue = "";
+
 	let arr = [];
-	let filterValue = "";
+
 	$: {
 		arr = [...$templates];
 		arr.reverse();
