@@ -11,7 +11,7 @@
 		arr.reverse();
 
 		//todo: same as Projects
-		if(filterValue.length > 0){
+		if(filterValue && filterValue.length > 0){
 			let lower = filterValue.toLowerCase();
 			arr = arr.filter(template => {
 				if(template.name.toLowerCase().includes(lower)){
@@ -31,7 +31,7 @@
 	{#each arr as template}
 		<Template template={template} />
 	{:else}
-		{ #if filterValue.length > 0 }
+		{ #if filterValue && filterValue.length > 0 }
 			<h3>There is no match with {filterValue}</h3>
 		{:else}
 			<ul>

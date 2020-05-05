@@ -71,16 +71,19 @@
 {#if creating}
 	<Loading message="Creating {templateName}" />
 {:else}
-	<label>How to create new template:</label>
-	<ul>
-		<li>Drop folder</li>
-		<li>Write/paste local path</li>
-		<li>Write/paste Github repo (with .git)</li>
-	</ul>
 
-	<input bind:value={templatePath} placeholder="Template path/url" />
-	<input bind:value={templateName} placeholder="Template name" />
-	<textarea bind:value={templateDescription} placeholder="*(optional) Insert description"></textarea>
+	<label>
+		Template path/url:
+		<input bind:value={templatePath} placeholder="Template path/url" />
+	</label>
+	<label>
+		Template name:
+		<input bind:value={templateName} placeholder="Template name" />
+	</label>
+	<label>
+		Description:
+		<textarea bind:value={templateDescription} placeholder="*(optional) Insert description"></textarea>
+	</label>
 	<button on:click={onCreateTemplate}>Create</button>
 {/if}
 

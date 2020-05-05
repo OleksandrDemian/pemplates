@@ -63,8 +63,14 @@
 {#if creating}
 	<Loading message="Creating {projectName}" />
 {:else}
-	<input bind:value={projectName} placeholder="Project name" />
-	<textarea bind:value={projectDescription} placeholder="*(optional) Insert description"></textarea>
+	<label>
+		Project name:
+		<input bind:value={projectName} placeholder="Project name" />
+	</label>
+	<label>
+		Description:
+		<textarea bind:value={projectDescription} placeholder="*(optional) Insert description"></textarea>
+	</label>
 	<button on:click={onCreateTemplate}>Create</button>
 	<button on:click={onCancel}>Cancel</button>
 {/if}
