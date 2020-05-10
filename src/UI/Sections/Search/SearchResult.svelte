@@ -3,6 +3,7 @@
 	import NewTemplate from "../Templates/NewTemplate.svelte";
 	import TemplatesRepo from "../../../stores/templatesRepo";
 	import {createEventDispatcher} from "svelte";
+	import {notify} from "power-notifier";
 
 	export let result;
 
@@ -10,12 +11,31 @@
 	let template = TemplatesRepo.getGitTemplate(result.html_url + ".git");
 	let showCreation = false;
 
-	export const onShowTemplate = () => {
+	const onShowTemplate = () => {
 		dispatcher("showTemplate", {
 			name: template.name,
 			id: template.id
 		});
 	};
+
+	const onCreated = () => {
+		showCreation = false;
+		template = TemplatesRepo.getGitTemplate(result.html_url + ".git");
+
+		notify({
+			title: "Template created successfully",
+			message: template.name + " was added to your templates",
+			timeout: 2500,
+			buttons: [
+				{ text: "Show template", action: "showTemplate" }
+			],
+			onStateUpdate: function (action) {
+				if(action === "showTemplate"){
+					onShowTemplate();
+				}
+			}
+		});
+	}
 </script>
 
 <Container>
@@ -24,7 +44,7 @@
 			templateName={result.full_name}
 			templatePath={result.html_url + ".git"}
 			templateDescription={result.description}
-			on:created={() => showCreation = false}
+			on:created={onCreated}
 		/>
 		<button on:click={() => showCreation = false}>Cancel</button>
 	{ :else }

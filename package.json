@@ -49,7 +49,7 @@
     "electron-squirrel-startup": "^1.0.0",
     "fs-extra": "^9.0.0",
     "sirv-cli": "^0.4.4",
-    "power-notifier": "1.1.0"
+    "power-notifier": "1.1.1"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.50",

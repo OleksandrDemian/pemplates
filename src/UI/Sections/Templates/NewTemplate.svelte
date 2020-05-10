@@ -46,12 +46,6 @@
 				creationTimestamp: Date.now()
 			});
 
-			notify({
-				title: "Template created successfully",
-				message: templateName + " was added to your templates",
-				timeout: 2500
-			});
-
 			templateName = null;
 			templatePath = null;
 			templateDescription = null;
