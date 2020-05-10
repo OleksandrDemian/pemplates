@@ -7,6 +7,7 @@
 	export let template;
 
 	let updating = false;
+	let creationDateLabel = new Date(template.creationTimestamp).toLocaleString();
 
 	const dispatch = createEventDispatcher();
 
@@ -32,6 +33,7 @@
 		{ #if template.description }
 			<p>{template.description}</p>
 		{ /if }
+		<p>Creation date: {creationDateLabel}</p>
 		<p><b>Remote:</b> <a href={template.originalPath} target="_blank">{template.originalPath}</a></p>
 
 		<button on:click={createProject}>Create project</button>

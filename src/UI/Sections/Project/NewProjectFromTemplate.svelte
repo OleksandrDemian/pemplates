@@ -34,7 +34,8 @@
 			const success = await createProjectFromTemplate({
 				name: projectName,
 				templateId,
-				description: projectDescription
+				description: projectDescription,
+				creationTimestamp: Date.now()
 			});
 
 			if (success) {

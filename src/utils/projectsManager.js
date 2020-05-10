@@ -10,7 +10,7 @@ export const removeProject = ({ path }) => {
 	fse.removeSync(path);
 };
 
-export const createProjectFromTemplate = async ({ name, templateId, description }) => {
+export const createProjectFromTemplate = async ({ name, templateId, description, creationTimestamp }) => {
 	if(ProjectsRepo.has(name)){
 		if(!confirm("Project with this name already exists, would you like to override it?"))
 			return false;
@@ -29,7 +29,8 @@ export const createProjectFromTemplate = async ({ name, templateId, description 
 		description,
 		id: generateIdFromName(template.name),
 		templateId: templateId,
-		editorId: null
+		editorId: null,
+		creationTimestamp
 	};
 	
 	await ProjectsRepo.addProject(project);

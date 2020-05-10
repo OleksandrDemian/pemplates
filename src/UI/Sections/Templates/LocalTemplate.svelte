@@ -1,6 +1,8 @@
 <script>
 	import { createEventDispatcher } from "svelte";
+
 	export let template;
+	let creationDateLabel = new Date(template.creationTimestamp).toLocaleString();
 
 	const dispatch = createEventDispatcher();
 
@@ -14,6 +16,7 @@
 	{ #if template.description }
 		<p>{template.description}</p>
 	{ /if }
+	<p>Creation date: {creationDateLabel}</p>
 
 	<button on:click={onCreateProject}>Create project</button>
 	<button on:click={onPublishTemplate}>Publish template on Github</button>

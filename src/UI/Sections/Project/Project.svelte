@@ -8,7 +8,8 @@
 	import {notify} from "power-notifier";
 
 	export let project = null;
-	export let selectedEditorId = project ? project.editorId : null;
+	let selectedEditorId = project ? project.editorId : null;
+	let creationDateLabel = new Date(project.creationTimestamp).toLocaleString();
 
 	const remove = async () => {
 		if(confirm(`Are you sure you want to delete ${project.name} and all of it's files from your system?`)){
@@ -43,9 +44,10 @@
 	{ #if project.description }
 		<p>{project.description}</p>
 	{ /if }
+	<p>Creation date: {creationDateLabel}</p>
 
-	<button on:click={remove}>Remove</button>
 	<button on:click={openFolder}>Open in explorer</button>
 	<button on:click={open}>Open in editor</button>
 	<EditorsSelect bind:value={selectedEditorId} />
+	<button on:click={remove}>Remove</button>
 </Container>

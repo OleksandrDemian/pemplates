@@ -14,7 +14,7 @@ export const removeTemplate = async ({ path }) => {
 	await fse.remove(path);
 };
 
-export const createTemplate = async ({name, path, description}) => {
+export const createTemplate = async ({name, path, description, creationTimestamp}) => {
 	if(TemplatesRepo.has(name)){
 		if(!confirm("Template with this name already exists, would you like to override it?"))
 			return false;
@@ -36,7 +36,8 @@ export const createTemplate = async ({name, path, description}) => {
 		originalPath: path,
 		id: generateIdFromName(name),
 		description,
-		remote
+		remote,
+		creationTimestamp
 	});
 };
 

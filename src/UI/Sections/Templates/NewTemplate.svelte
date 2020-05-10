@@ -42,7 +42,8 @@
 			await createTemplate({
 				name: templateName,
 				path: templatePath,
-				description: templateDescription
+				description: templateDescription,
+				creationTimestamp: Date.now()
 			});
 
 			notify({
