@@ -3,7 +3,7 @@
 	import Project from "../Sections/Project/Project.svelte";
 
 	let arr = [];
-	let filterValue = "";
+	export let filterValue = "";
 
 	$: {
 		arr = [...$projectsRepo];

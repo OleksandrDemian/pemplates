@@ -41,7 +41,17 @@
 			if (success) {
 				notify({
 					title: "New project created",
-					timeout: 2500
+					timeout: 5000,
+					buttons: [
+						{ text: "Show", action: "show" }
+					],
+					onStateUpdate: function (action) {
+						if(action === "show"){
+							dispatcher("showProject", {
+								name: projectName
+							});
+						}
+					}
 				});
 
 				dispatcher("created");

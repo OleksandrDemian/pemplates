@@ -29,7 +29,7 @@
 <div id="templatesList">
 	<input bind:value={filterValue} placeholder="Filter templates" />
 	{#each arr as template}
-		<Template template={template} />
+		<Template template={template} on:showProject />
 	{:else}
 		{ #if filterValue && filterValue.length > 0 }
 			<h3>There is no match with {filterValue}</h3>

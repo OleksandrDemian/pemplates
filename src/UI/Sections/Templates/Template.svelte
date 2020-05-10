@@ -89,6 +89,7 @@
 			templateId={template.id}
 			on:created={() => creatingProject = false}
 			on:cancel={() => creatingProject = false}
+			on:showProject
 		/>
 	{:else}
 		{ #if template.remote }

@@ -32,6 +32,11 @@
 		activeTab = "templates";
 	};
 
+	const showProject = (e) => {
+		filter = e.detail.name;
+		activeTab = "projects";
+	};
+
 	onMount(() => addListener(dropListener));
 	onDestroy(() => removeListener(dropListener));
 </script>
@@ -48,10 +53,10 @@
 <div id="content">
 	{#if activeTab === "projects" }
 		<h1>Projects</h1>
-		<Projects />
+		<Projects filterValue={filter} />
 	{:else if activeTab === "templates"}
 		<h1>Templates</h1>
-		<Templates filterValue={filter} />
+		<Templates filterValue={filter} on:showProject={showProject} />
 	{:else if activeTab === "search"}
 		<h1>Search</h1>
 		<Search on:showTemplate={showTemplate} />
