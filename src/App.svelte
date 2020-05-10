@@ -1,18 +1,18 @@
 <script>
-	import Projects from "./Views/Projects.svelte";
-	import Templates from "./Views/Templates.svelte";
-	import Search from "./Views/Search.svelte";
-	import NewTemplate from "./Views/NewTemplate.svelte";
+	import Projects from "./UI/Views/Projects.svelte";
+	import Templates from "./UI/Views/Templates.svelte";
+	import Search from "./UI/Views/Search.svelte";
+	import NewTemplate from "./UI/Views/New.svelte";
 
 	import {onMount, onDestroy} from "svelte";
 	import {addListener, removeListener} from "./utils/dropListener";
-	import Settings from "./Views/Settings.svelte";
-	import {createRepository, pushRepository} from "./utils/gitUtils";
-	import {notify} from "power-notifier";
+	import Settings from "./UI/Views/Settings.svelte";
+	import Container from "./UI/Components/Container.svelte";
 
 	let activeTab = "search";
 	let name = null;
 	let path = null;
+	let filter = null;
 
 	const dropListener = (e) => {
 		activeTab = "new";
@@ -24,6 +24,17 @@
 		activeTab = tab;
 		name = null;
 		path = null;
+		filter = null;
+	};
+
+	const showTemplate = (e) => {
+		filter = e.detail.name;
+		activeTab = "templates";
+	};
+
+	const showProject = (e) => {
+		filter = e.detail.name;
+		activeTab = "projects";
 	};
 
 	onMount(() => addListener(dropListener));
@@ -31,47 +42,51 @@
 </script>
 
 <div id="navigation">
-	<h1 style="padding-left: 10px">Menu</h1>
-	<button on:click={() => navigate("projects")}>Projects</button><br/>
-	<button on:click={() => navigate("templates")}>Templates</button><br/>
-	<button on:click={() => navigate("search")}>Search</button><br/>
-	<button on:click={() => navigate("new")}>New</button><br/>
-	<button on:click={() => navigate("settings")}>Settings</button><br/>
+	<h1>Menu</h1>
+	<h3 class="cursor" on:click={() => navigate("search")}><u>Search</u></h3>
+	<h3 class="cursor" on:click={() => navigate("projects")}><u>Projects</u></h3>
+	<h3 class="cursor" on:click={() => navigate("new")}><u>New template</u></h3>
+	<h3 class="cursor" on:click={() => navigate("templates")}><u>Templates</u></h3>
+	<h3 class="cursor" on:click={() => navigate("settings")}><u>Settings</u></h3>
 </div>
 
 <div id="content">
 	{#if activeTab === "projects" }
-		<Projects />
+		<h1>Projects</h1>
+		<Projects filterValue={filter} />
 	{:else if activeTab === "templates"}
-		<Templates />
+		<h1>Templates</h1>
+		<Templates filterValue={filter} on:showProject={showProject} />
 	{:else if activeTab === "search"}
-		<Search />
+		<h1>Search</h1>
+		<Search on:showTemplate={showTemplate} />
 	{:else if activeTab === "new"}
-		<NewTemplate projectName={name} projectPath={path} />
+		<h1>New Template</h1>
+		<NewTemplate templateName={name} templatePath={path} />
 	{:else if activeTab === "settings"}
+		<h1>Settings</h1>
 		<Settings />
 	{/if}
 </div>
 
 <style>
+	h3 {
+		display: table;
+	}
 
 	#navigation {
 		display: inline-block;
 		vertical-align: top;
-		padding-top: 10px;
+		padding: 10px;
 		width: 25%;
-		min-width: max-content;
-	}
-
-	button {
-		width: 50%;
-		border-radius: unset;
+		min-width: 200px;
 	}
 
 	#content {
 		display: inline-block;
 		padding: 10px;
 		width: 50%;
+		min-width: 500px;
 	}
 
 </style>

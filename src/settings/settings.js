@@ -1,4 +1,4 @@
-import { fse, _path } from "../requires";
+import {_path, fse} from "../requires";
 
 const SETTINGS_PATH = "/.Pemplates/settings";
 
@@ -12,9 +12,9 @@ const readSettings = (fileName) => {
 	}
 };
 
-const writeSettings = (fileName, value) => {
-	fse.ensureDirSync(_path.join(__dirname, SETTINGS_PATH));
-	fse.writeJsonSync(_path.join(__dirname, SETTINGS_PATH, fileName), value);
+const writeSettings = async (fileName, value) => {
+	await fse.ensureDir(_path.join(__dirname, SETTINGS_PATH));
+	await fse.writeJson(_path.join(__dirname, SETTINGS_PATH, fileName), value);
 };
 
 /**
@@ -34,6 +34,8 @@ export const SETTINGS = (fileName, defaultValue) => {
 	// const read = () => readSettings(fileName);
 	const get = () => settings;
 	const set = (value) => settings = value;
+	const setProp = (key, value) => settings[key] = value;
+	const getProp = (key) => settings[key];
 	const update = (name, value) => settings[name] = value;
 	
 	return {
@@ -41,6 +43,8 @@ export const SETTINGS = (fileName, defaultValue) => {
 		// read,
 		get,
 		set,
+		setProp,
+		getProp,
 		update
 	}
 };
@@ -58,7 +62,7 @@ export const ARRAY_SETTINGS = (fileName, defaultValue) => {
 		settings = defaultValue;
 	}
 	
-	const write = () => writeSettings(fileName, settings);
+	const write = async () => await writeSettings(fileName, settings);
 	const get = () => settings;
 	const push = (value) => settings.push(value);
 	const set = (value) => settings = [...value];

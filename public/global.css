@@ -1,13 +1,29 @@
-:root {
+:root [night] {
+	--background: black;
+	--surface: #0f0f0f;
+	--primary: white;
+	--secondary: white;
+}
+
+:root [day] {
+	--background: #e6e6e6;
+	--surface: white;
+	--primary: #2c3e50;
+	--secondary: #2c3e50;
+}
+
+:root [day-red] {
+	--background: #fafafa;
+	--surface: white;
+	--primary: black;
+	--secondary: #fd5523;
+}
+
+:root [wave] {
 	--background: #33333d;
 	--surface: #373740;
 	--primary: white;
-	--secondary: #8bff74;
-
-	--on-background: black;
-	--on-surface: black;
-	--on-primary: black;
-	--on-secondary: black;
+	--secondary: rgb(215, 0, 187);
 }
 
 /*:root {*/
@@ -15,11 +31,6 @@
 /*	--surface: #f1f5df;*/
 /*	--primary: #356859;*/
 /*	--secondary: #fd5523;*/
-
-/*	--on-background: black;*/
-/*	--on-surface: black;*/
-/*	--on-primary: black;*/
-/*	--on-secondary: black;*/
 /*}*/
 
 /*yellow*/
@@ -28,11 +39,6 @@
 /*	--surface: white;*/
 /*	--primary: black;*/
 /*	--secondary: black;*/
-
-/*	--on-background: black;*/
-/*	--on-surface: black;*/
-/*	--on-primary: black;*/
-/*	--on-secondary: black;*/
 /*}*/
 
 html, body {
@@ -45,6 +51,11 @@ html, body {
 	color: var(--secondary);
 }
 
+.cursor {
+	cursor: pointer;
+}
+
+/*background: linear-gradient(180deg, var(--background) 85%, var(--secondary) 100%);*/
 body {
 	background-color: var(--background);
 	color: var(--primary);
@@ -55,7 +66,6 @@ body {
 
 a {
 	color: var(--secondary);
-	text-decoration: none;
 }
 
 h1 {
@@ -82,6 +92,10 @@ input, button, select, textarea {
 	box-sizing: border-box;
 	border: none;
 	border-radius: 2px;
+}
+
+[day] input, button, select, textarea {
+	border: 1px solid var(--secondary);
 }
 
 input:disabled {
