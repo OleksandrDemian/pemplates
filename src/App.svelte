@@ -39,8 +39,8 @@
 <div id="navigation">
 	<h1>Menu</h1>
 	<h3 class="cursor" on:click={() => navigate("search")}><u>Search</u></h3>
-	<h3 class="cursor" on:click={() => navigate("new")}><u>New template</u></h3>
 	<h3 class="cursor" on:click={() => navigate("projects")}><u>Projects</u></h3>
+	<h3 class="cursor" on:click={() => navigate("new")}><u>New template</u></h3>
 	<h3 class="cursor" on:click={() => navigate("templates")}><u>Templates</u></h3>
 	<h3 class="cursor" on:click={() => navigate("settings")}><u>Settings</u></h3>
 </div>

@@ -1,8 +1,8 @@
 {
-  "name": "svelte-electron-forge",
-  "productName": "svelte-electron-forge",
+  "name": "pemplates",
+  "productName": "pemplates",
   "version": "1.0.0",
-  "description": "Svelte + Electron Forge",
+  "description": "Projects template manager",
   "main": "src/index.js",
   "scripts": {
     "start": "concurrently \"npm:svelte-dev\" \"electron-forge start\"",
@@ -15,7 +15,7 @@
     "svelte-start": "sirv public"
   },
   "keywords": [],
-  "author": "jeffd23",
+  "author": "Oleksandr Demian",
   "license": "MIT",
   "config": {
     "forge": {

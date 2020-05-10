@@ -13,11 +13,21 @@
 	let creatingProject = false;
 
 	const publishTemplate = async () => {
+		const token = SettingsRepo.getGithubToken();
+		if(!token){
+			notify({
+				title: "Token is not defined",
+				message: "In order to publish your template on github you need to provide a token with write permission in Settings > Git Token",
+				applyStyle: "warn"
+			});
+			return false;
+		}
+
 		try {
 			const response = await createRepository({
 				name: template.name,
 				description: template.description,
-				authToken: SettingsRepo.getGithubToken()
+				authToken: token
 			});
 			const data = await response.json();
 			const repoUrl = data["html_url"];
@@ -25,7 +35,7 @@
 			await updateTopics({
 				owner: data.owner.login,
 				repo: data.name,
-				authToken: SettingsRepo.getGithubToken()
+				authToken: token
 			});
 
 			await pushRepository({repoUrl, cwd: template.path});
