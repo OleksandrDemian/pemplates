@@ -1,6 +1,6 @@
 # Pempaltes
 Pemplate allows you to create a project template and easily reuse it.
-If you want you can share it with a global community on GitHub
+If you want you can share it with a global community on GitHub with just one click.
 
 ## How it works
 #### Have a project you want to use as base for other projects?
@@ -12,7 +12,7 @@ Example: Write in search bar "svelte electron" and it will give you a list of te
 Press download > create project from template and start coding your idea.
 There already are thousands of templates on Github.
 
-#### Have a uniq template and want to share it with global community?
+#### Have a unique template and want to share it with global community?
 Select your project, click on "Publish template on Github" and it will be available for everyone on GitHub.
 
 ## Key features
@@ -41,7 +41,7 @@ npm start
 
 ### Build project
 ```
-npm publish
+npm make
 ```
 
 ### Notes
