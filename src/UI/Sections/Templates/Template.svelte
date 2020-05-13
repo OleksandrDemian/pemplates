@@ -8,13 +8,19 @@
 	import LocalTemplate from "./LocalTemplate.svelte";
 	import RemoteTemplate from "./RemoteTemplate.svelte";
 	import NewProject from "../Project/NewProjectFromTemplate.svelte";
+	import Loading from "../../Components/Loading.svelte";
+
+	const NONE = 0;
+	const CREATING = 1;
+	const PUBLISHING = 2;
 
 	export let template;
-	let creatingProject = false;
+	let state = NONE;
 
 	const publishTemplate = async () => {
 		const token = SettingsRepo.getGithubToken();
-		if(!token){
+		state = PUBLISHING;
+		if (!token) {
 			notify({
 				title: "Token is not defined",
 				message: "In order to publish your template on github you need to provide a token with write permission in Settings > Git Token",
@@ -55,12 +61,13 @@
 				applyStyle: "error"
 			});
 		}
+		state = NONE;
 	};
 
 	const updateTemplateRepo = () => alert("Not implemented yet♥");
 
 	const remove = async () => {
-		if(!confirm(`Are you sure you want to delete ${template.name} and all of it's files from your system?`)){
+		if (!confirm(`Are you sure you want to delete ${template.name} and all of it's files from your system?`)) {
 			return false;
 		}
 
@@ -82,27 +89,29 @@
 </script>
 
 <Container>
-	{#if creatingProject}
+	{#if state === CREATING}
 		<NewProject
 			projectName={template.name}
 			projectDescription={template.description}
 			templateId={template.id}
-			on:created={() => creatingProject = false}
-			on:cancel={() => creatingProject = false}
+			on:created={() => state = NONE}
+			on:cancel={() => state = NONE}
 			on:showProject
 		/>
+	{:else if state === PUBLISHING}
+		<Loading message="Publishing {template.name} to GitHub" />
 	{:else}
 		{ #if template.remote }
 			<RemoteTemplate
 				template={template}
-				on:createProject={() => creatingProject = true}
+				on:createProject={() => state = CREATING}
 				on:updateTemplateRepo={updateTemplateRepo}
 				on:removeTemplate={remove}
 			/>
 		{:else}
 			<LocalTemplate
 				template={template}
-				on:createProject={ () => creatingProject = true }
+				on:createProject={ () => state = CREATING }
 				on:publishTemplate={publishTemplate}
 				on:removeTemplate={remove}
 			/>
