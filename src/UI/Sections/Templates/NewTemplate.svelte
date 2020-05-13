@@ -35,12 +35,14 @@
 			return false;
 		}
 
+		const name = templateName;
+
 		dispatcher("startCreating");
 		creating = true;
 
 		try {
 			await createTemplate({
-				name: templateName,
+				name,
 				path: templatePath,
 				description: templateDescription,
 				creationTimestamp: Date.now()
@@ -58,7 +60,7 @@
 			});
 		}
 
-		dispatcher("created");
+		dispatcher("created", { name });
 		creating = false;
 	};
 </script>

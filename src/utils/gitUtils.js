@@ -35,10 +35,10 @@ export const updateTopics = ({ owner, repo, authToken }) => {
 export const pushRepository = async ({ repoUrl, cwd }) => {
 	const options = { cwd };
 	
-	childProcess.execSync("git init", options);
-	childProcess.execSync("git add .", options);
-	childProcess.execSync('git commit -m "Create template"', options);
+	await childProcess.exec("git init", options);
+	await childProcess.exec("git add .", options);
+	await childProcess.exec('git commit -m "Create template"', options);
 	//todo: sh is not a ...bla bla -> added Git\Bin to PATH
-	childProcess.execSync("git push --set-upstream " + repoUrl + " master", options);
+	await childProcess.exec("git push --set-upstream " + repoUrl + " master", options);
 	return true;
 };

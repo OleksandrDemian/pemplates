@@ -7,7 +7,7 @@
 	import {onMount, onDestroy} from "svelte";
 	import {addListener, removeListener} from "./utils/dropListener";
 	import Settings from "./UI/Views/Settings.svelte";
-	import Container from "./UI/Components/Container.svelte";
+	import {notify} from "power-notifier";
 
 	let activeTab = "search";
 	let name = null;
@@ -37,6 +37,20 @@
 		activeTab = "projects";
 	};
 
+	const onTemplateCreated = (e) => {
+		notify({
+			title: "Template created successfully",
+			buttons: [
+				{ text: "Show", action: "show_template" }
+			],
+			onStateUpdate: (action) => {
+				if(action === "show_template"){
+					showTemplate(e);
+				}
+			}
+		});
+	};
+
 	onMount(() => addListener(dropListener));
 	onDestroy(() => removeListener(dropListener));
 </script>
@@ -62,7 +76,7 @@
 		<Search on:showTemplate={showTemplate} />
 	{:else if activeTab === "new"}
 		<h1>New Template</h1>
-		<NewTemplate templateName={name} templatePath={path} />
+		<NewTemplate templateName={name} templatePath={path} on:created={onTemplateCreated} />
 	{:else if activeTab === "settings"}
 		<h1>Settings</h1>
 		<Settings />

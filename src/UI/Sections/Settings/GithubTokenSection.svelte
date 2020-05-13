@@ -1,10 +1,15 @@
 <script>
 	import SettingsRepo from "../../../stores/settingsRepo";
+	import {notify} from "power-notifier";
 
 	let gitToken = SettingsRepo.getGithubToken();
 
 	const setGitToken = () => {
 		SettingsRepo.setGithubToken(gitToken);
+		notify({
+			title: "Token saved successfully",
+			timeout: 3000
+		});
 	};
 </script>
 
