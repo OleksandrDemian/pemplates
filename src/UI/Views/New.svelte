@@ -17,6 +17,7 @@
 
 <Container>
 	<NewTemplate
+			on:created
 			templateName={templateName}
 			templatePath={templatePath}
 	/>
